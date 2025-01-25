@@ -2,36 +2,34 @@ import { useLoaderData } from "react-router-dom";
 
 const Get = () => {
     const getusers = useLoaderData();
+
     return (
         <div>
             <h1 className="text-4xl font-bold text-center text-blue-600 mb-8">
-                Get Method Practice
+                Get Method
             </h1>
-            <div className="flex flex-wrap justify-center gap-5">
-                {/* {users.length > 0 ? (
-                    users.map((user) => (
-                        <div
-                            key={user.id}
-                            className="card bg-base-100 w-96 shadow-xl p-4"
-                        >
-                            <div className="card-body">
-                                <h2 className="card-title text-blue-700">{user.name}</h2>
-                                <p>Email: {user.email}</p>
-                                <p>Phone: {user.phone}</p>
-                            </div>
-                        </div>
-                    ))
-                ) : (
-                    <p className="text-center text-gray-500">No users found.</p>
-                )} */}
+            <div className="overflow-x-auto">
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th>SL</th>
+                            <th>Name</th>
+                            <th>Job</th>
+                            <th>Join Date</th>
+                        </tr>
+                    </thead>
+                    {getusers.length > 0 ? (getusers.map((user) => (
+                        <tbody key={user.id}>
+                            <tr>
+                                <th>{user.id}</th>
+                                <td>{user.name}</td>
+                                <td>{user.email}</td>
+                                <td>{user.created_at}</td>
+                            </tr>
+                        </tbody>
+                    ))) : <p>No User Found</p>}
 
-                {/* {users.length > 0 ? (users.map((user) => ())) : (<p className="text-center text-gray-500">No users found.</p>)} */}
-
-                {getusers.length < 0 ? (getusers.map((user) => (
-                    <div key={user.id}>
-
-                    </div>
-                ))) : (<p>No user found</p>)}
+                </table>
             </div>
         </div>
     );

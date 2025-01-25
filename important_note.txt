@@ -1,0 +1,27 @@
+                {users.length > 0 ? (
+                    users.map((user) => (
+                        <div
+                            key={user.id}
+                            className="card bg-base-100 w-96 shadow-xl p-4"
+                        >
+                            <div className="card-body">
+                                <h2 className="card-title text-blue-700">{user.name}</h2>
+                                <p>Email: {user.email}</p>
+                                <p>Phone: {user.phone}</p>
+                            </div>
+                        </div>
+                    ))
+                ) : (
+                    <p className="text-center text-gray-500">No users found.</p>
+                )}
+
+                {users.length > 0 ? (users.map((user) => ())) : (<p className="text-center text-gray-500">No users found.</p>)}
+
+
+flex justify-center items-center min-h-screen:
+
+1. flex makes the parent container a flex container.
+2. justify-center centers the content horizontally.
+3. items-center centers the content vertically.
+4. min-h-screen ensures the container takes at least the height of the viewport, so the content is centered vertically.
+
