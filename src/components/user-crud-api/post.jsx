@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Swal from "sweetalert2"; 
 
 const Post = () => {
 
@@ -6,9 +7,7 @@ const Post = () => {
         name: '',
         email: '',
         password: ''
-    })
-
-    const [responseMessage, setResponseMessage] = useState('');
+    });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -30,26 +29,48 @@ const Post = () => {
                 body: JSON.stringify(formData),
             });
 
-            // Log the raw response
-            console.log('Raw Response:', response);
-
             if (response.ok) {
-                // Parse JSON response if the status is OK
                 const data = await response.json();
-                console.log('Success Response:', data);
-                setResponseMessage(`User Registered Successfully: ${data.message}`);
+                // Display success alert with timer and reload
+                Swal.fire({
+                    title: 'Success!',
+                    text: `User Registered Successfully: ${data.message}`,
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                    timer: 1000,
+                    willClose: () => {
+                        window.location.reload(); // Reload the page after the alert closes
+                    }
+                });
             } else {
-                // Parse JSON error response
                 const errorData = await response.json();
-                console.log('Error Response:', errorData);
-                setResponseMessage(`Error: ${errorData.message}`);
+                // Display error alert with timer
+                Swal.fire({
+                    title: 'Error!',
+                    text: `Error: ${errorData.message}`,
+                    icon: 'error',
+                    confirmButtonText: 'Try Again',
+                    timer: 3000, // 3 seconds delay
+                    willClose: () => {
+                        // Optionally reload or handle other things after closing
+                    }
+                });
             }
         } catch (error) {
             console.error('Network Error:', error);
-            setResponseMessage(`Request Failed: ${error.message}`);
+            // Display network error alert with timer
+            Swal.fire({
+                title: 'Request Failed',
+                text: `Error: ${error.message}`,
+                icon: 'error',
+                confirmButtonText: 'OK',
+                timer: 3000, // 3 seconds delay
+                willClose: () => {
+                    // Optionally reload or handle other things after closing
+                }
+            });
         }
     };
-
 
     return (
         <div>
@@ -93,9 +114,6 @@ const Post = () => {
                     </button>
                 </form>
             </div>
-            {responseMessage && (
-                <p className="text-center text-red-500 mt-4">{responseMessage}</p>
-            )}
         </div>
     );
 };
