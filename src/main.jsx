@@ -8,6 +8,7 @@ import {
 import Get from './components/user-crud-api/get';
 import Post from './components/user-crud-api/post';
 import View from './components/user-crud-api/view';
+import Put from './components/user-crud-api/put';
 
 
 const router = createBrowserRouter([
@@ -26,6 +27,11 @@ const router = createBrowserRouter([
     element: <View></View>,
     loader: ({ params }) => fetch(`http://127.0.0.1:9000/api/find-user/${params.id}`)
   },
+  {
+    path: "/update-user/:id",
+    element: <Put></Put>,
+    loader: ({ params }) => fetch(`http://127.0.0.1:9000/api/find-user/${params.id}`)
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -73,6 +73,11 @@ const Get = () => {
                                                 View
                                             </button>
                                         </Link>
+                                        <Link to={`/update-user/${user.id}`}>
+                                            <button className="bg-yellow-500 text-white p-2 rounded mr-2">
+                                                Update
+                                            </button>
+                                        </Link>
                                         <button
                                             onClick={() => handleDelete(user.id)}
                                             className="bg-red-500 text-white p-2 rounded"
